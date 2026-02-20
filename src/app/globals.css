@@ -1,0 +1,112 @@
+@import "tailwindcss";
+
+:root {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8f9fa;
+  --bg-tertiary: #f1f3f5;
+  --fg-primary: #1a1a2e;
+  --fg-secondary: #495057;
+  --fg-muted: #868e96;
+  --border: #dee2e6;
+  --accent: #4361ee;
+  --accent-hover: #3a56d4;
+  --accent-light: #eef0ff;
+  --success: #2ecc71;
+  --success-bg: #eafaf1;
+  --error: #e74c3c;
+  --error-bg: #fdedec;
+  --sidebar-bg: #1a1a2e;
+  --sidebar-fg: #c8ccd0;
+  --sidebar-active: #4361ee;
+  --sidebar-hover: rgba(255, 255, 255, 0.08);
+  --editor-bg: #ffffff;
+  --editor-border: #dee2e6;
+  --cat-encoders: #7c3aed;
+  --cat-encoders-bg: #f3f0ff;
+  --cat-escapers: #ea580c;
+  --cat-escapers-bg: #fff7ed;
+  --cat-generators: #0d9488;
+  --cat-generators-bg: #f0fdfa;
+  --cat-converters: #4f46e5;
+  --cat-converters-bg: #eef2ff;
+}
+
+.dark {
+  --bg-primary: #0f0f1a;
+  --bg-secondary: #1a1a2e;
+  --bg-tertiary: #252540;
+  --fg-primary: #e8e8ef;
+  --fg-secondary: #a0a0b8;
+  --fg-muted: #6c6c85;
+  --border: #2e2e48;
+  --accent: #5a7aff;
+  --accent-hover: #6b88ff;
+  --accent-light: #1c2340;
+  --success: #2ecc71;
+  --success-bg: #1a2e22;
+  --error: #e74c3c;
+  --error-bg: #2e1a1a;
+  --sidebar-bg: #12121f;
+  --sidebar-fg: #8888a0;
+  --sidebar-active: #5a7aff;
+  --sidebar-hover: rgba(255, 255, 255, 0.05);
+  --editor-bg: #1a1a2e;
+  --editor-border: #2e2e48;
+  --cat-encoders: #a78bfa;
+  --cat-encoders-bg: #1e1533;
+  --cat-escapers: #fb923c;
+  --cat-escapers-bg: #2e1a0a;
+  --cat-generators: #2dd4bf;
+  --cat-generators-bg: #0a2e2a;
+  --cat-converters: #818cf8;
+  --cat-converters-bg: #1a1a3e;
+}
+
+@theme inline {
+  --color-bg-primary: var(--bg-primary);
+  --color-bg-secondary: var(--bg-secondary);
+  --color-bg-tertiary: var(--bg-tertiary);
+  --color-fg-primary: var(--fg-primary);
+  --color-fg-secondary: var(--fg-secondary);
+  --color-fg-muted: var(--fg-muted);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-light: var(--accent-light);
+  --color-success: var(--success);
+  --color-success-bg: var(--success-bg);
+  --color-error: var(--error);
+  --color-error-bg: var(--error-bg);
+  --color-sidebar-bg: var(--sidebar-bg);
+  --color-sidebar-fg: var(--sidebar-fg);
+  --color-sidebar-active: var(--sidebar-active);
+  --color-sidebar-hover: var(--sidebar-hover);
+  --color-editor-bg: var(--editor-bg);
+  --color-editor-border: var(--editor-border);
+  --color-cat-encoders: var(--cat-encoders);
+  --color-cat-encoders-bg: var(--cat-encoders-bg);
+  --color-cat-escapers: var(--cat-escapers);
+  --color-cat-escapers-bg: var(--cat-escapers-bg);
+  --color-cat-generators: var(--cat-generators);
+  --color-cat-generators-bg: var(--cat-generators-bg);
+  --color-cat-converters: var(--cat-converters);
+  --color-cat-converters-bg: var(--cat-converters-bg);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--bg-primary);
+  color: var(--fg-primary);
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+}
+
+/* CodeMirror theme overrides */
+.cm-editor {
+  height: 100% !important;
+  font-size: 14px;
+}
+
+.cm-editor .cm-scroller {
+  font-family: var(--font-geist-mono), monospace;
+}
