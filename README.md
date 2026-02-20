@@ -1,36 +1,96 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# DevFormat
+
+**Live demo: [devformat.com](https://devformat.com)**
+
+**28 free online developer tools — all in your browser, no server, no tracking.**
+
+DevFormat is a fast, ad-free collection of formatter, validator, encoder, escaper, generator, and converter tools for developers. Every operation runs entirely client-side, so your data never leaves your machine.
+
+## Tools
+
+### Formatters
+| Tool | Route |
+|------|-------|
+| JSON Formatter | `/formatters/json` |
+| XML Formatter | `/formatters/xml` |
+| HTML Formatter | `/formatters/html` |
+| SQL Formatter | `/formatters/sql` |
+
+### Validators
+| Tool | Route |
+|------|-------|
+| JSON Validator | `/validators/json` |
+| XML Validator | `/validators/xml` |
+| HTML Validator | `/validators/html` |
+| SQL Validator | `/validators/sql` |
+
+### Encoders
+| Tool | Route |
+|------|-------|
+| Base64 Encode/Decode | `/encoders/base64` |
+| URL Encoder/Decoder | `/encoders/url` |
+| HTML Entities Encoder | `/encoders/html-entities` |
+| JWT Decoder | `/encoders/jwt-decoder` |
+| MD5 Hash Generator | `/encoders/md5` |
+| SHA-256 Hash Generator | `/encoders/sha256` |
+
+### Escapers
+| Tool | Route |
+|------|-------|
+| JSON Escaper | `/escapers/json` |
+| XML Escaper | `/escapers/xml` |
+| HTML Escaper | `/escapers/html` |
+| SQL Escaper | `/escapers/sql` |
+| Regex Escaper | `/escapers/regex` |
+
+### Generators
+| Tool | Route |
+|------|-------|
+| UUID v4 Generator | `/generators/uuid` |
+| Password Generator | `/generators/password` |
+| Lorem Ipsum Generator | `/generators/lorem-ipsum` |
+| Color Generator | `/generators/color` |
+| Timestamp Generator | `/generators/timestamp` |
+
+### Converters
+| Tool | Route |
+|------|-------|
+| JSON ↔ YAML | `/converters/json-yaml` |
+| JSON → CSV | `/converters/json-csv` |
+| Number Base Converter | `/converters/number-base` |
+| Text Case Converter | `/converters/text-case` |
+
+## Tech Stack
+
+- **Framework:** [Next.js](https://nextjs.org) (App Router)
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS v4
+- **Editor:** CodeMirror 6 via `@uiw/react-codemirror`
+- **Libraries:** Prettier, sql-formatter, js-yaml, vkbeautify, uuid
+- **Deployment:** Vercel
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run dev      # Start development server
+npm run build    # Production build
+npm run start    # Start production server
+npm run lint     # Run ESLint
+```
 
-## Learn More
+## Privacy
 
-To learn more about Next.js, take a look at the following resources:
+All tools run entirely in the browser. No data is sent to any server. No analytics, no tracking, no ads.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## License
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+MIT
