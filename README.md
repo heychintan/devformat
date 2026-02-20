@@ -1,5 +1,7 @@
 # DevFormat
 
+**Live demo: [devformat.com](https://devformat.com)**
+
 **28 free online developer tools — all in your browser, no server, no tracking.**
 
 DevFormat is a fast, ad-free collection of formatter, validator, encoder, escaper, generator, and converter tools for developers. Every operation runs entirely client-side, so your data never leaves your machine.
