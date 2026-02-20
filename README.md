@@ -1,6 +1,6 @@
 # DevFormat
 
-**Live demo: [devformat.com](https://devformat.com)**
+**Live demo: [formatter-three.vercel.app](https://formatter-three.vercel.app/)**
 
 **28 free online developer tools — all in your browser, no server, no tracking.**
 
