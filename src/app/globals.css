@@ -19,8 +19,8 @@
   --sidebar-fg: #c8ccd0;
   --sidebar-active: #4361ee;
   --sidebar-hover: rgba(255, 255, 255, 0.08);
-  --editor-bg: #ffffff;
-  --editor-border: #dee2e6;
+  --editor-bg: #f6f8fa;
+  --editor-border: #d0d7de;
   --cat-encoders: #7c3aed;
   --cat-encoders-bg: #f3f0ff;
   --cat-escapers: #ea580c;
@@ -50,8 +50,8 @@
   --sidebar-fg: #8888a0;
   --sidebar-active: #5a7aff;
   --sidebar-hover: rgba(255, 255, 255, 0.05);
-  --editor-bg: #1a1a2e;
-  --editor-border: #2e2e48;
+  --editor-bg: #1e1e2e;
+  --editor-border: #313244;
   --cat-encoders: #a78bfa;
   --cat-encoders-bg: #1e1533;
   --cat-escapers: #fb923c;
@@ -101,12 +101,14 @@ body {
   font-family: var(--font-geist-sans), system-ui, sans-serif;
 }
 
-/* CodeMirror theme overrides */
-.cm-editor {
-  height: 100% !important;
-  font-size: 14px;
+/* Monaco editor container — ensure font variable resolves inside the iframe-like div */
+.monaco-editor,
+.monaco-editor .view-lines {
+  font-family: var(--font-geist-mono), "Geist Mono", "Fira Code", monospace !important;
 }
 
-.cm-editor .cm-scroller {
-  font-family: var(--font-geist-mono), monospace;
+/* Tighten the find widget border radius to match the app */
+.monaco-editor .find-widget {
+  border-radius: 8px !important;
+  overflow: hidden;
 }

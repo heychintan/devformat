@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { Toaster } from "sonner";
 import Sidebar from "./Sidebar";
 import TopBar from "./TopBar";
 
@@ -39,6 +40,14 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
           {children}
         </main>
       </div>
+      <Toaster
+        position="bottom-right"
+        richColors
+        closeButton
+        toastOptions={{
+          style: { fontFamily: "var(--font-geist-sans), system-ui, sans-serif" },
+        }}
+      />
     </div>
   );
 }
