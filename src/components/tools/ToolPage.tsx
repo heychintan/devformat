@@ -1,30 +1,23 @@
 "use client";
 
-import { useEffect, useCallback } from "react";
+import { useEffect, useCallback, useRef } from "react";
+import { toast } from "sonner";
 import EditorPanel from "./EditorPanel";
-import ResultBadge from "./ResultBadge";
 import { useToolState } from "@/hooks/useToolState";
 import { getToolById } from "@/lib/tools/registry";
-import type { ToolDefinition } from "@/lib/tools/types";
+import type { ToolResult } from "@/lib/tools/types";
 
 interface ToolPageProps {
   toolId: string;
 }
 
 export default function ToolPage({ toolId }: ToolPageProps) {
-  const tool = getToolById(toolId)!;
-  const state = useToolState(tool);
+  const tool        = getToolById(toolId)!;
+  const state       = useToolState(tool);
   const isFormatter = tool.category === "formatters";
   const isGenerator = tool.mode === "generate";
 
-  const actionLabel = isFormatter
-    ? "Format"
-    : tool.category === "validators"
-      ? "Validate"
-      : isGenerator
-        ? "Generate"
-        : "Convert";
-
+  // ── Keyboard shortcut (Ctrl/Cmd + Enter still works as manual trigger) ──
   const handleKeyDown = useCallback(
     (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key === "Enter") {
@@ -32,7 +25,7 @@ export default function ToolPage({ toolId }: ToolPageProps) {
         state.execute();
       }
     },
-    [state]
+    [state],
   );
 
   useEffect(() => {
@@ -40,13 +33,33 @@ export default function ToolPage({ toolId }: ToolPageProps) {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [handleKeyDown]);
 
-  // Auto-execute for generators with no input required
+  // ── Auto-execute on input/indentSize change (debounced) ────────────────
+  useEffect(() => {
+    if (isGenerator || !state.input.trim()) return;
+    const id = setTimeout(() => state.execute(), 600);
+    return () => clearTimeout(id);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [state.input, state.indentSize, isGenerator]);
+
+  // ── Auto-execute for generators with no input ──────────────────────────
   useEffect(() => {
     if (isGenerator && !tool.sampleInput && !state.output) {
       state.execute();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // ── Toast on error (success is silent — the output updating is feedback) ─
+  const prevResult = useRef<ToolResult | null>(null);
+  useEffect(() => {
+    if (!state.result || state.result === prevResult.current) return;
+    prevResult.current = state.result;
+    if (!state.result.success) {
+      toast.error(state.result.error ?? "Something went wrong", {
+        duration: 5000,
+      });
+    }
+  }, [state.result]);
 
   return (
     <div className="flex flex-col h-full p-4 gap-4">
@@ -58,21 +71,8 @@ export default function ToolPage({ toolId }: ToolPageProps) {
         </div>
       </div>
 
-      {/* Action Bar */}
+      {/* Action Bar — no execute button, just helpers */}
       <div className="flex flex-wrap items-center gap-3">
-        <button
-          onClick={state.execute}
-          disabled={state.processing || (!isGenerator && !state.input.trim())}
-          className="inline-flex items-center gap-2 rounded-md bg-accent px-4 py-2 text-sm font-medium text-white hover:bg-accent-hover disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-        >
-          {state.processing ? (
-            <svg className="animate-spin" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M21 12a9 9 0 11-6.219-8.56" />
-            </svg>
-          ) : null}
-          {actionLabel}
-        </button>
-
         {tool.sampleInput && (
           <button
             onClick={state.loadSample}
@@ -103,20 +103,10 @@ export default function ToolPage({ toolId }: ToolPageProps) {
             </select>
           </div>
         )}
-
-        <span className="text-xs text-fg-muted hidden sm:inline ml-auto">
-          Ctrl/Cmd + Enter to {actionLabel.toLowerCase()}
-        </span>
       </div>
-
-      {/* Result Badge */}
-      {state.result && (
-        <ResultBadge success={state.result.success} error={state.result.error} />
-      )}
 
       {/* Editor Panels */}
       {isGenerator ? (
-        /* Single-panel layout for generators */
         <div className="flex flex-col gap-4 flex-1 min-h-0">
           {tool.sampleInput && (
             <div className="flex-shrink-0">
@@ -138,7 +128,6 @@ export default function ToolPage({ toolId }: ToolPageProps) {
           </div>
         </div>
       ) : (
-        /* Dual-panel layout for transform tools */
         <div className="flex flex-col lg:flex-row gap-4 flex-1 min-h-0">
           <EditorPanel
             label="Input"
